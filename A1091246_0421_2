@@ -1,0 +1,38 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
+public class A1091246_0421_2 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("請輸入日期（格式為 YYYY/MM/DD 或 MM/DD/YYYY）：");
+        String dateString = scanner.nextLine();
+
+        LocalDate date = parseDate(dateString);
+
+        if (date != null) {
+            System.out.println("您輸入的日期是 " + date.getYear() + " 年 " + date.getMonthValue() + " 月 " + date.getDayOfMonth() + " 日。");
+        } else {
+            System.out.println("您輸入的日期格式錯誤。");
+        }
+    }
+
+    public static LocalDate parseDate(String dateString) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            LocalDate date = LocalDate.parse(dateString, formatter);
+            return date;
+        } catch (Exception e) {
+
+        }
+
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            LocalDate date = LocalDate.parse(dateString, formatter);
+            return date;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+}
